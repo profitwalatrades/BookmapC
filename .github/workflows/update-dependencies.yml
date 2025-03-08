@@ -17,7 +17,9 @@ jobs:
         run: npx browserslist@latest --update-db
 
       - name: Update dependencies
-        run: npm install next@latest postcss@latest autoprefixer@latest
+        run: |
+          npm install next@latest postcss@latest autoprefixer@latest
+          npm install
 
       - name: Commit changes
         run: |
