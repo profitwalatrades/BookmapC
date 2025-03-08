@@ -1,0 +1,28 @@
+name: Update Dependencies
+on:
+  workflow_dispatch: # Allows you to manually trigger the workflow
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18 # Use the Node.js version your project requires
+
+      - name: Update caniuse-lite
+        run: npx browserslist@latest --update-db
+
+      - name: Update dependencies
+        run: npm install next@latest postcss@latest autoprefixer@latest
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "Your Name"
+          git config --global user.email "your-email@example.com"
+          git add .
+          git commit -m "Update dependencies and caniuse-lite"
+          git push
